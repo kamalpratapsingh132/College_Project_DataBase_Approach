@@ -1,0 +1,215 @@
+﻿@model College_Project.Models.Student
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Colorlib Templates">
+    <meta name="author" content="Colorlib">
+    <meta name="keywords" content="Colorlib Templates">
+
+    <!-- Title Page-->
+    <title>Au Register Forms by Colorlib</title>
+
+    <!-- Icons font CSS-->
+    <link href="vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
+    <link href="vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
+    <!-- Font special for pages-->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+
+    <!-- Vendor CSS-->
+    <link href="~/vendor/select2/select2.min.css" rel="stylesheet" media="all">
+    <link href="~/vendor/datepicker/daterangepicker.css" rel="stylesheet" media="all">
+
+    <!-- Main CSS-->
+    <link href="~/css/main.css" rel="stylesheet" media="all">
+    <style>
+        .marg {
+            margin-right:50px;
+        }
+
+        .master {
+            margin-right: 85px;
+        }
+        </style>
+</head>
+
+<body>
+    <div class="page-wrapper bg-gra-02 p-t-130 p-b-100 font-poppins">
+        <div class="wrapper wrapper--w680">
+            <div class="card card-4">
+                <div class="card-body">
+                    <h2 class="title"><b>Student Registration Form</b></h2>
+                    <form asp-Controller="Student" asp-action="Create" method="POST">
+                        <div class="row row-space">
+                            <div class="col-2">
+                                <div class="col-mg-3">
+                                   
+                                </div>
+                                <div class="input-group">
+
+                                    <label class="label">first name</label>
+                                    @Html.HiddenFor(Model => Model.ID, new { @class = "form-control change" })
+                                    @Html.TextBoxFor(Model => Model.First_Name, new { @class = "input--style-4" })
+                                    @*<input class="input--style-4" type="text" name="First_NAME">*@
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <label class="label">last name</label>
+                                    @Html.TextBoxFor(Model => Model.Last_Name, new { @class = "form-control change" })
+                                    @*<input class="input--style-4" type="text" name="Last_Name">*@
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row row-space">
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <label class="label">Email</label>
+                                    @Html.TextBoxFor(Model => Model.Email, new { @class = "input--style-4" })
+                                    @*<input class="input--style-4" type="email" asp-for="Email" name="Email">*@
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <label class="label">Mobile Number</label>
+                                    @Html.TextBoxFor(Model => Model.Mob_No, new { @class = "input--style-4" })
+                                   @* <input class="input--style-4" type="text" asp-for="Mob_No" name="Mob_No">*@
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row row-space">
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <label class="label">State</label>
+                                    @*<input class="input--style-4" type="text" name="State" id="State">*@
+                                    @Html.DropDownListFor(model => model.State,
+                                  ViewBag.StateList as IEnumerable<SelectListItem>, "Select State", new { @class = "form-control marg  input--style-4" })
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <label class="label">City</label>
+                                    @*<input class="input--style-4" type="text" name="City">*@
+                                    @Html.DropDownListFor(model => model.city, new SelectList(string.Empty, "Value", "Text"), "Select City", new { @class = "form-control master input--style-4" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row row-space">
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <label class="label">Address</label>
+                                    <div class="input-group-icon">
+                                        @Html.TextBoxFor(Model => Model.Address, new { @class = "input--style-4 js-datepicker" })
+                                        @*<input class="input--style-4 js-datepicker" type="text" asp-for="Address" name="Address">*@
+                                        <i class="zmdi zmdi-calendar-note input-icon js-btn-calendar"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+          
+                        <div class="p-t-15">
+                            <button class="btn btn--radius-2 btn--blue" type="submit">Submit</button>
+                        </div>
+
+                        <div class="col-lg-12">
+                            <span style="color:red">@ViewBag.Message</span>
+                            <span style="color:red">@TempData["msg"]</span>
+                            <span style="color:red">@TempData["mg"]</span>
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+        <div style="padding-top:50px; margin:10px; overflow:scroll">
+            <table class="table table-striped pre-scrollable" style="width:150%; table-layout:fixed">
+                <tr>
+                    
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Mob Number</th>
+                    <th>Email</th>
+                    <th>State</th>
+                    <th>City</th>
+                    <th>Address</th>
+                    <th style="text-align:center">Edit</th>
+                    <th style="text-align:center">Delete</th>
+                </tr>
+
+                @foreach (var item in ViewBag.clientlist)
+                {
+                    <tr>
+                        @*<td>@item.ID</td>*@
+                        <td>@item.First_Name</td>
+                        <td>@item.Last_Name</td>
+                        <td>@item.Mob_No</td>
+                        <td>@item.Email</td>
+                        <td>@item.State</td>
+                        <td>@item.city</td>
+                        <td>@item.Address</td>
+                        <td align="center">
+                           <a href="@Url.Action("Create", new { item.ID })" class="btn btn-success">Edit</a>
+                               @*<a asp-Controller="Student" asp-action="Create" asp-route-id="@item.ID" class="btn btn-success">Edit</a>*@
+                        </td>
+                        <td align="center">
+                           @* <a asp-Controller="Student" asp-action="Delete" asp-route-id="@item.ID"  OnClick="return confirm('Are you sure? want to delete the data.');" class="btn btn-danger">Delete</a>*@
+                            <a href="@Url.Action("Studentdelete", new { item.ID })" OnClick="return confirm('Are you sure? want to delete the data.');" class="btn btn-danger">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+
+
+
+
+    <!-- Jquery JS-->
+    <script src="~/vendor/jquery/jquery.min.js"></script>
+    <!-- Vendor JS-->
+    <script src="~/vendor/select2/select2.min.js"></script>
+    <script src="~vendor/datepicker/moment.min.js"></script>
+    <script src="~/vendor/datepicker/daterangepicker.js"></script>
+
+    <!-- Main JS-->
+    <script src="js/global.js"></script>
+    <script src="~/Scripts/jquery-3.4.1.js"></script>
+    <script>
+        $('#State').change(function () {
+            /*debugger*/
+            $.ajax({
+                url: "/Student/City_Bind",
+                dataType: "json",
+                async: false,
+                data: {
+                    State: $(this).val()
+                },
+                success: function (City) {
+
+                    var s = "<option value=''>Select City</option>";
+                    for (var i = 0; i < City.length; i++) {
+                        s += "<option value='" + City[i].Value + "'>" + City[i].Text + "</option>";
+                    }
+                    $('#city').html(s);
+                },
+                error: function (xopt, err) {
+                    alert("Some Error Occured");
+                    return false;
+                }
+            });
+        });
+    </script>
+
+</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+</html>
+<!-- end document-->
